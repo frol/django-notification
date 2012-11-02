@@ -91,7 +91,9 @@ def get_notification_setting(user, notice_type, medium):
 
 
 def should_send(user, notice_type, medium):
-    return get_notification_setting(user, notice_type, medium).send
+    if medium in NOTICE_MEDIA_DEFAULTS:
+        return get_notification_setting(user, notice_type, medium).send
+    return False
 
 def send_multipart_email(subject, message, from_email, recipient_list, html_message=None, **kwargs):
     if not html_message:
